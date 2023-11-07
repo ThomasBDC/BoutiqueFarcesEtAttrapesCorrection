@@ -1,0 +1,45 @@
+﻿@using BoutiqueFarcesEtAttrapes.Models;
+@model List<Stock>
+
+<div class="text-center">
+    <h1 class="display-4">Weasley, Farces pour Sorciers Facétieux</h1>
+    <p>Liste des produits</p>
+    <hr />
+</div>
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3>Aucun article disponible.</h3>
+    <a href="/Home/AddProducts">Ajouter les produits</a>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom du produit</th>
+                <th scope="col">Description</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Stock item in Model)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Product.Description</td>
+                    @if (item.Product.Price != 1.0)
+                    {
+                        <td>@item.Product.Price Gallions</td>
+                    }
+                    else
+                    {
+                        <td>@item.Product.Price Gallion</td>
+                    }
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
